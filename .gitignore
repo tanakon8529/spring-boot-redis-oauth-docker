@@ -1,7 +1,7 @@
 # Compiled class file
 *.class
 
-# Log file
+# Log files
 *.log
 
 # BlueJ files
@@ -22,3 +22,34 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Maven target directory
+target/
+
+# Eclipse and IntelliJ IDEA project files
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
+# IntelliJ IDEA module and workspace files
+*.iws
+*.ipr
+
+# NetBeans project files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code project files
+.vscode/
+
+# Mac OS files
+.DS_Store
+
+# Docker files
+docker-compose.override.yml

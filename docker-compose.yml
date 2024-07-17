@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_REDIS_PASSWORD: myredispassword
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass myredispassword
