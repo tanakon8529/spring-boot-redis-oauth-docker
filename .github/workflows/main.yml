@@ -34,7 +34,11 @@ jobs:
         run: ./mvnw clean package
 
       - name: Log in to Docker Hub
-        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
       - name: Build Docker image
         run: docker-compose build
@@ -44,7 +48,7 @@ jobs:
 
       - name: Test protected endpoint
         run: |
-          sleep 10  # Give some time for the services to start
+          sleep 5  # Give some time for the services to start
           response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080/protected)
           if [ "$response" -ne 401 ]; then
             echo "Protected endpoint test failed. Expected HTTP status 401, but got $response."
